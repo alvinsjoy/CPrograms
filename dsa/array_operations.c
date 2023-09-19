@@ -36,8 +36,6 @@ void main()
 					b[j]=a[i];
 					j++;
 				}
-				else
-					printf("Invalid");
 			}
 			for(i=0;i<j;i++)
 				printf("%d,",b[i]);
