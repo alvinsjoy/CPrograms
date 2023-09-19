@@ -8,12 +8,12 @@ void main()
 {
 	int a[50],b[50],n,ch,i,d,j=0;
 	printf("\nEnter the number of elements:");
-		scanf("%d",&n);
-		for(i=0;i<n;i++)
-		{
-			printf("Enter the %d th element:",i+1);
-			scanf("%d",&a[i]);
-		}
+	scanf("%d",&n);
+	for(i=0;i<n;i++)
+	{
+		printf("Enter the %d th element:",i+1);
+		scanf("%d",&a[i]);
+	}
 	printf("Enter your choice:\n1.Insertion\n2.Deletion\n3.Sort\n4.Search\n");
 	scanf("%d",&ch);
 	switch(ch)
