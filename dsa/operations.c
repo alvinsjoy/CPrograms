@@ -101,5 +101,6 @@ void main()
 			break;
 		default:
 			printf("Invalid Entry");
+			break;
 	}
 }
