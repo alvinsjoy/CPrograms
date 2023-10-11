@@ -17,7 +17,7 @@ void main()
 				scanf("%d",&a[i].coeff);
 			}
 				for(int i=0;i<n;i++){
-					printf("%d x^%d\t",a[i].coeff,a[i].pow);
+					printf("%d x^%d ",a[i].coeff,a[i].pow);
 				}
 				
 					
