@@ -19,13 +19,11 @@ void main()
 				for(int i=0;i<n;i++){
 					printf("%d x^%d ",a[i].coeff,a[i].pow);
 				}
-				
-					
 					printf("\nEnter the value of x:");
 					scanf("%d",&x);
-					
-					for(int i=0;i<n;i++){
+					for(int i=0;i<n;i++)
+					{
 						sum+=a[i].coeff*pow(x,a[i].pow);
-					};
-					printf("Sum: %d",sum);
+					}
+					printf("Result: %d",sum);
 	}
