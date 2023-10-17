@@ -45,5 +45,5 @@ void main()
     	}
 	}
 	else
-		printf("\nNot a sparse matrix");	
+		printf("Not a sparse matrix");	
 }
