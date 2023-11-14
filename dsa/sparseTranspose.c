@@ -1,84 +1,55 @@
-#include <stdio.h>
-typedef struct{
-    int row;
-    int col;
-    int val;
-}tuple;
-tuple sparseMatrix[100], transposeSparse[100];
-void display(int arr[100][100],int m,int n)
+#include<stdio.h>
+void main()
 {
-    for(int i=0;i<m;i++)
-    {
-        for(int j=0; j<n; j++)
-            printf("%5d",arr[i][j]);
-        printf("\n");
-    }
-}
-void convToSparse(int arr[100][100],int m,int n)
-{
-    int k = 1;
-    sparseMatrix[0].row=m;
-    sparseMatrix[0].col=n;
-    for(int i=0;i<m;i++)
-    {
-        for(int j=0;j<n;j++)
-        {
-            if(arr[i][j]!=0)
-            {
-                sparseMatrix[k].row=i+1;
-                sparseMatrix[k].col=j+1;
-                sparseMatrix[k].val=arr[i][j];
-                k++;
-            }
-        }
-    }
-    sparseMatrix[0].val=k-1;
-}
-void printSparseMatrix(tuple sparseMat[100])
-{
-    int k = 0;
-    while (k!=sparseMat[0].val+1)
-    {
-        printf("%5d%5d%5d\n",sparseMat[k].row,sparseMat[k].col,sparseMat[k].val);
-        k++;
-    }
-}
-void transposeofSparse()
-{
-    transposeSparse[0].row=sparseMatrix[0].col;
-    transposeSparse[0].col=sparseMatrix[0].row;
-    transposeSparse[0].val=sparseMatrix[0].val;
-    int k = 1;
-    for (int i=1;i<=sparseMatrix[0].col;i++)
-    {
-        for (int j=1;j<=sparseMatrix[0].val;j++)
-        {
-            if (sparseMatrix[j].col==i)
-            {
-                transposeSparse[k].row=sparseMatrix[j].col;
-                transposeSparse[k].col=sparseMatrix[j].row;
-                transposeSparse[k].val=sparseMatrix[j].val;
-                k++;
-            }
-        }
-    }
+	int matrix[100][100];
+	int spmatrix[100][3];
+	int transpose[100][3];
+	int i,j,k,row,col;
+	printf("Enter the order of sparse matrix\n");
+	scanf("%d%d",&row,&col);
+	printf("Enter the element of the sparse matrix\n");
+	for(i=0;i<row;i++)
+	for(j=0;j<col;j++)
+		scanf("%d",&matrix[i][j]);
+	k=1;
+	for(i=0;i<row;i++)
+	for(j=0;j<col;j++)
+	if(matrix[i][j]!=0)
+	{
+		spmatrix[k][0]=i;
+		spmatrix[k][1]=j;
+		spmatrix[k][2]=matrix[i][j];
+		k++;
+	}
+	spmatrix[0][0]=row;
+	spmatrix[0][1]=col;
+	spmatrix[0][2]=k-1;
 
-}
-void main(){
-    int m, n;
-    printf("Enter size of matrix: ");
-    scanf("%d %d",&m,&n);
-    int matrix[100][100];
-
-    printf("\nEnter elements of mtarix: \n");
-    for (int i=0; i<m; i++){
-        for (int j=0; j<n; j++){
-            scanf("%d",&matrix[i][j]);
-        }
-    }
-    display(matrix,m,n);
-    convToSparse(matrix,m,n);
-    printSparseMatrix(sparseMatrix);
-    transposeofSparse();
-    printSparseMatrix(transposeSparse);
+	printf("Elements of the sparse matrix:\n");
+	for(i=0;i<=spmatrix[0][2];i++)
+	{
+		for(j=0;j<3;j++)
+			printf("%d\t",spmatrix[i][j]);
+		printf("\n");
+	}
+	transpose[0][0]=spmatrix[0][1];
+	transpose[0][1]=spmatrix[0][0];
+	transpose[0][2]=spmatrix[0][2];
+	k=1;
+	for(i=0;i<spmatrix[0][1];i++)
+	for(j=0;j<=spmatrix[0][2];j++)
+	if(spmatrix[j][1]==i)
+	{
+		transpose[k][0]=spmatrix[j][1];
+		transpose[k][1]=spmatrix[j][0];
+		transpose[k][2]=spmatrix[j][2];
+		k++;
+	}
+	printf("Transpose of the sparse matrix\n");
+	for(i=0;i<=transpose[0][2];i++)
+	{
+	for(j=0;j<3;j++)
+		printf("%d\t",transpose[i][j]);
+	printf("\n");
+	}
 }
