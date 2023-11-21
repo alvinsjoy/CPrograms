@@ -78,6 +78,7 @@ void main()
         j++;
         k++;
     }
+    printf("\nSum of the two sparse matrices:");
     printf("\nRow\tColumn\tValue\n");
     for (int i=0;i<k;i++)
     {
