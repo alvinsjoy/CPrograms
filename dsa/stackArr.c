@@ -14,17 +14,15 @@ void print()
 void push(int n)
 {
 	int p;
-	int k=top;
 	printf("Enter the element to be pushed:");
 	scanf("%d",&p);
-	if(k>=n-1)
+	if(top>=n-1)
 	{
 		printf("Stack is full, cannot push\n");
 	}
 	else
 	{
-		stack[++k]=p;
-		top++;
+		stack[++top]=p;
 	}
 	print();
 	
