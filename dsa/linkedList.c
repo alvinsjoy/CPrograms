@@ -87,7 +87,7 @@ void deleteSmall(){
 			small = temp->data;
 		}
 		temp = temp->next;
-		} 
+	} 
 	temp = head;
 	while(temp->data!=small){
 		prevTemp = temp; 
