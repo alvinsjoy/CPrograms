@@ -156,7 +156,7 @@ void main()
 				break;
 			case 5:
 				printf("Enter the data to be deleted: ");
-				scanf("%d"pre,&d);
+				scanf("%d",&d);
 				deleteData(d);
 				display();
 				break;
@@ -166,7 +166,7 @@ void main()
 				deletePosition(d);
 				display();
 				break;
-			case 7: 
+			case 7:
 				printf("Smallest element deleted: ");
 				deleteSmall();
 				display();
