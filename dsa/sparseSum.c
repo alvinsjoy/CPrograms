@@ -13,7 +13,7 @@ void main()
 	}
 	printf("Enter the number of non zero elements of second matrix:");
 	scanf("%d",&u2);
-	printf("Enter the sparse representation of first matrix:");
+	printf("Enter the sparse representation of second matrix:");
 	for(int i=0;i<u2;i++)
 	{
 		for(int j=0;j<3;j++)
