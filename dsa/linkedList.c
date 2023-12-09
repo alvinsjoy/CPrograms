@@ -23,18 +23,15 @@ void addElement(int d){
 	}
 	else{
 		while(temp->next!=NULL)
-			{
-				temp = temp->next;
-			} 
-			temp->next = newNode;
+			temp = temp->next;
+		temp->next = newNode;
 	}
 }
 void addAfter(int d,int p){
 	temp = head;
 	newNode = create(d);
-	while(temp->data != p){
-		temp = temp->next; 
-	}
+	while(temp->data != p)
+		temp = temp->next;
 	newNode->next = temp->next;
 	temp->next = newNode;
 }
@@ -80,30 +77,40 @@ void deletePosition(int p){
 	free(temp);
 }
 void deleteSmall(){
-	temp = head;
-	int small = temp->data;
-	while(temp!=NULL){
-		if(small > temp->data){
-			small = temp->data;
-		}
-		temp = temp->next;
-	} 
-	temp = head;
-	while(temp->data!=small){
-		prevTemp = temp; 
-		temp = temp->next;
-	}
-	prevTemp->next = temp->next;
-	free(temp);
+	struct node* temp = head;
+    struct node* minNode = head;
+    struct node* prevMinNode = NULL;
+    struct node* prevTemp = NULL;
+	int min = head->data;
+
+    while(temp != NULL){
+        if(temp->data < min){
+            min = temp->data;
+            minNode = temp;
+            prevMinNode = prevTemp;
+        }
+        prevTemp = temp;
+        temp = temp->next; 
+    }
+	if(minNode == head){
+    head = minNode->next;
+    }
+	else{
+        prevMinNode->next = minNode->next;
+    }
+    free(minNode);
 }
 void search(int d){
-	temp = head;
-	int i=1;
-	while(temp->data!=d){
-		temp = temp->next;
-		i++;
-	}
-	printf("Element at position %d",i);
+   temp = head;
+   int i=1;
+   while(temp != NULL && temp->data!=d){
+       temp = temp->next;
+       i++;
+   }
+   if(temp != NULL)
+       printf("\nElement at position %d",i);
+   else
+       printf("\nElement not found in the list");
 }
 void display(){
 	if(head == NULL )
@@ -114,7 +121,7 @@ void display(){
 			printf("%d ",temp->data);
 			temp = temp->next;
 		}
-		printf("%d.",temp->data);
+		printf("%d",temp->data);
 	}
 }
 void main()
