@@ -77,10 +77,10 @@ void deletePosition(int p){
 	free(temp);
 }
 void deleteSmall(){
-	struct node* temp = head;
+	temp = head;
     struct node* minNode = head;
     struct node* prevMinNode = NULL;
-    struct node* prevTemp = NULL;
+    prevTemp = NULL;
 	int min = head->data;
 
     while(temp != NULL){
