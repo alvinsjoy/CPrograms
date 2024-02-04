@@ -1,144 +1,141 @@
-#include<stdio.h>
-#include<string.h>
-#include<limits.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+#include <stdlib.h>
 #define MAX 100
 int top = -1;
 char stack[MAX];
-int isFull ()
+int isFull()
 {
   return top == MAX - 1;
 }
-int isEmpty ()
+int isEmpty()
 {
   return top == -1;
 }
 
-void push (char item)
+void push(char item)
 {
-  if (isFull ())
+  if (isFull())
     return;
   top++;
   stack[top] = item;
 }
-int pop ()
+int pop()
 {
-  if (isEmpty ())
-    return INT_MIN;     
+  if (isEmpty())
+    return INT_MIN;
   return stack[top--];
 }
-int peek ()
+int peek()
 {
-  if (isEmpty ())
+  if (isEmpty())
     return INT_MIN;
   return stack[top];
-} 
-int checkIfOperand (char ch)
+}
+int checkIfOperand(char ch)
 {
   return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
-int precedence (char ch)
+int precedence(char ch)
 {
   switch (ch)
-    {
-    case '+':
-    case '-':
-      return 1;
+  {
+  case '+':
+  case '-':
+    return 1;
 
-    case '*':
-    case '/':
-      return 2;
+  case '*':
+  case '/':
+    return 2;
 
-    case '^':
-      return 3;
-    }
+  case '^':
+    return 3;
+  }
   return -1;
 }
-int getPostfix (char *expression)
+int getPostfix(char *expression)
 {
   int i, j;
 
   for (i = 0, j = -1; expression[i]; ++i)
+  {
+
+    if (checkIfOperand(expression[i]))
+      expression[++j] = expression[i];
+
+    else if (expression[i] == '(')
+      push(expression[i]);
+
+    else if (expression[i] == ')')
     {
-      
-      if (checkIfOperand (expression[i]))
-	expression[++j] = expression[i];
-
-      else if (expression[i] == '(')
-	push (expression[i]);
- 
-      else if (expression[i] == ')')
-	{
-	  while (!isEmpty (stack) && peek (stack) != '(')
-	    expression[++j] = pop (stack);
-	  if (!isEmpty (stack) && peek (stack) != '(')
-	    return -1;		            
-	  else
-	    pop (stack);
-	}
-      else			
-	{
-	  while (!isEmpty (stack)
-		 && precedence (expression[i]) <= precedence (peek (stack)))
-	    expression[++j] = pop (stack);
-	  push (expression[i]);
-	}
-
+      while (!isEmpty(stack) && peek(stack) != '(')
+        expression[++j] = pop(stack);
+      if (!isEmpty(stack) && peek(stack) != '(')
+        return -1;
+      else
+        pop(stack);
     }
-  while (!isEmpty (stack))
-    expression[++j] = pop (stack);
+    else
+    {
+      while (!isEmpty(stack) && precedence(expression[i]) <= precedence(peek(stack)))
+        expression[++j] = pop(stack);
+      push(expression[i]);
+    }
+  }
+  while (!isEmpty(stack))
+    expression[++j] = pop(stack);
 
   expression[++j] = '\0';
-
 }
 
-void reverse (char *exp)
+void reverse(char *exp)
 {
 
-  int size = strlen (exp);
+  int size = strlen(exp);
   int j = size, i = 0;
   char temp[size];
 
   temp[j--] = '\0';
   while (exp[i] != '\0')
-    {
-      temp[j] = exp[i];
-      j--;
-      i++;
-    }
-  strcpy (exp, temp);
+  {
+    temp[j] = exp[i];
+    j--;
+    i++;
+  }
+  strcpy(exp, temp);
 }
 
-void brackets (char *exp)
+void brackets(char *exp)
 {
   int i = 0;
   while (exp[i] != '\0')
-    {
-      if (exp[i] == '(')
-	exp[i] = ')';
-      else if (exp[i] == ')')
-	exp[i] = '(';
-      i++;
-    }
+  {
+    if (exp[i] == '(')
+      exp[i] = ')';
+    else if (exp[i] == ')')
+      exp[i] = '(';
+    i++;
+  }
 }
 
-void InfixtoPrefix (char *exp)
+void InfixtoPrefix(char *exp)
 {
 
-  int size = strlen (exp);
-  reverse (exp);
-  brackets (exp);
-  getPostfix (exp);
-  reverse (exp);
+  int size = strlen(exp);
+  reverse(exp);
+  brackets(exp);
+  getPostfix(exp);
+  reverse(exp);
 }
 
-void main ()
+void main()
 {
-  printf ("The infix is: ");
+  printf("The infix is: ");
 
   char expression[] = "((a/b)+c)-(d+(e*f))";
-  printf ("%s\n", expression);
-  InfixtoPrefix (expression);
-  printf ("The prefix is: ");
-  printf ("%s\n", expression);
+  printf("%s\n", expression);
+  InfixtoPrefix(expression);
+  printf("The prefix is: ");
+  printf("%s\n", expression);
 }
