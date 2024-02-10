@@ -27,12 +27,10 @@ void insert(int pow, int coeff, struct node **head){
     }
     else{
         temp = *head;
-        while(temp->next != NULL && (newnode->pow > temp->pow || newnode->pow < temp->pow)){
+        while(temp->next != NULL){
             prevTemp = temp;
             temp = temp->next;
         }
-        if(temp->next != NULL)
-            newnode->next = temp->next;
         temp->next = newnode;
     }
 }
@@ -74,25 +72,25 @@ void display(struct node *head){
 }
 void main(){
     int i, len1, len2, pow, coef;
-    printf("\nEnter the number of terms of the polynomial 1:");
+    printf("\nEnter the number of terms of the polynomial 1: ");
     scanf("%d", &len1);
-    printf("\nEnter the polynomial 1:");
+    printf("\nEnter the polynomial 1: ");
     for (i = 0; i < len1; i++)
     {
-        printf("\nEnter the power of the %d th term:", i + 1);
+        printf("\nEnter the power of the %d th term: ", i + 1);
         scanf("%d", &pow);
-        printf("\nEnter the coefficient of the %d th term:", i + 1);
+        printf("\nEnter the coefficient of the %d th term: ", i + 1);
         scanf("%d", &coef);
         insert(pow, coef, &poly1);
     }
-    printf("\nEnter the number of terms of the polynomial 2:");
+    printf("\nEnter the number of terms of the polynomial 2: ");
     scanf("%d", &len2);
     printf("\nEnter the polynomial 2:");
     for (i = 0; i < len2; i++)
     {
-        printf("\nEnter the power of the %d th term:", i + 1);
+        printf("\nEnter the power of the %d th term: ", i + 1);
         scanf("%d", &pow);
-        printf("\nEnter the coefficient of the %d th term:", i + 1);
+        printf("\nEnter the coefficient of the %d th term: ", i + 1);
         scanf("%d", &coef);
         insert(pow, coef, &poly2);
     }
