@@ -1,10 +1,6 @@
 #include <stdio.h>
-#include <stdlib.h>
-void merge(int arr[100], int low, int high, int mid){
-    int i, j, k, a[100];
-    i = low;
-    k = low;
-    j = mid + 1;
+void merge(int arr[], int low, int high, int mid){
+    int a[100], i = low, k = low, j = mid + 1;
     while(i <= mid && j <= high){
         if(arr[i] < arr[j]){
             a[k] = arr[i];
@@ -26,11 +22,10 @@ void merge(int arr[100], int low, int high, int mid){
         j++;
         k++;
     }
-    for(i = low; i <= high; i++){
+    for(i = low; i <= high; i++)
         arr[i] = a[i];
-    }
 }
-void mergeSort(int arr[100], int low, int high){
+void mergeSort(int arr[], int low, int high){
     if(low < high){
         int mid = (high + low)/2;
         mergeSort(arr, low, mid);
