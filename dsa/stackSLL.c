@@ -23,15 +23,13 @@ void push(int d)
     newNode = create(d);
     if (head == NULL)
     {
-        head = newNode;
-        temp = head;
+        newNode->next = NULL;
     }
     else
     {
-        while (temp->next != NULL)
-            temp = temp->next;
-        temp->next = newNode;
+        newNode->next = head;
     }
+    head = newNode;
 }
 void pop()
 {
@@ -42,8 +40,7 @@ void pop()
     else
     {
         temp = head;
-        while (temp->next != NULL)
-            temp = temp->next;
+        head = temp->next;
         free(temp);
         temp = NULL;
     }
@@ -57,8 +54,6 @@ void peek()
     else
     {
         temp = head;
-        while (temp->next != NULL)
-            temp = temp->next;
         printf("Top element: %d\n", temp->data);
     }
 }
